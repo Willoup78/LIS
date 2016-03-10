@@ -1,3 +1,0 @@
-SmartVision project
-
-Library : 
