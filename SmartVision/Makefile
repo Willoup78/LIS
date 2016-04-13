@@ -2,6 +2,12 @@
 # Put your stlink folder here so make burn will work.
 # STLINK=~/stlink.git
 
+# Binaries will be generated with this name (.elf, .bin, .hex, etc)
+PROJ_NAME=SmartVision
+
+# Put your STM32F4 library code directory here
+STM_COMMON=../STM32F4-Discovery_FW_V1.1.0
+
 # Put your source files here (or *.c, etc)
 SRCS = main.c system_stm32f4xx.c stm32f4xx_it.c
 
@@ -25,17 +31,11 @@ SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
 
 # SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
 
-# Binaries will be generated with this name (.elf, .bin, .hex, etc)
-PROJ_NAME=SmartVision
-
-# Put your STM32F4 library code directory here
-STM_COMMON=../STM32F4-Discovery_FW_V1.1.0
-
 # Normally you shouldn't need to change anything below this line!
 #######################################################################################
 
-CC=../gcc-arm-none-eabi-4_8-2014q1/bin/arm-none-eabi-gcc
-OBJCOPY=../gcc-arm-none-eabi-4_8-2014q1/bin/arm-none-eabi-objcopy
+CC = arm-none-eabi-gcc
+OBJCOPY = arm-none-eabi-objcopy
 
 # With optimization
 # CFLAGS  = -g -O2 -Wall -Tstm32_flash.ld 
