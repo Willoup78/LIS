@@ -3,12 +3,24 @@
 # STLINK=~/stlink.git
 
 # Put your source files here (or *.c, etc)
-SRCS = main.c 
-SRCS += system_stm32f4xx.c
+SRCS = main.c system_stm32f4xx.c stm32f4xx_it.c
+
+# Personal library
+SRCS += dcmi_ov7675.c
+SRCS += camera_api.c
 
 # Add .c files from library
 SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
 SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
+SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c
+SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
+SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
+SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+
+
+# SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+# SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c
+
 
 
 # SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c
@@ -25,14 +37,19 @@ STM_COMMON=../STM32F4-Discovery_FW_V1.1.0
 CC=../gcc-arm-none-eabi-4_8-2014q1/bin/arm-none-eabi-gcc
 OBJCOPY=../gcc-arm-none-eabi-4_8-2014q1/bin/arm-none-eabi-objcopy
 
-CFLAGS  = -g -O2 -Wall -Tstm32_flash.ld 
+# With optimization
+# CFLAGS  = -g -O2 -Wall -Tstm32_flash.ld 
+# Without optimization
+CFLAGS  = -g -O0 -Wall -Tstm32_flash.ld
+
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 CFLAGS += -I.
 
 # Include files from STM libraries
 CFLAGS += -I$(STM_COMMON)/Utilities/STM32F4-Discovery
-CFLAGS += -I$(STM_COMMON)/Libraries/CMSIS/Include -I$(STM_COMMON)/Libraries/CMSIS/ST/STM32F4xx/Include
+CFLAGS += -I$(STM_COMMON)/Libraries/CMSIS/Include 
+CFLAGS += -I$(STM_COMMON)/Libraries/CMSIS/ST/STM32F4xx/Include
 CFLAGS += -I$(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/inc/
 
 # add startup file to build
@@ -50,6 +67,7 @@ $(PROJ_NAME).elf: $(SRCS)
 	$(CC) $(CFLAGS) $^ -o $@ 
 	$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
 	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
+
 
 clean:
 	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin
