@@ -2,8 +2,11 @@
 # Put your stlink folder here so make burn will work.
 # STLINK=~/stlink.git
 
+# Put your STM32F4 library code directory here
+STM_COMMON=../STM32F4-Discovery_FW_V1.1.0
+
 # Put your source files here (or *.c, etc)
-SRCS = main.c system_stm32f4xx.c stm32f4xx_it.c
+SRCS = main.c system_stm32f4xx.c stm32f4xx_it.c 
 
 # Personal library
 SRCS += dcmi_ov7675.c
@@ -16,6 +19,23 @@ SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c
 SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c
 SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
 SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
+SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
+
+	# USB SRCS
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/cdc/usbd_cdc_vcp.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/core/usbd_core.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_conf/usbd_usr.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_conf/usbd_desc.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/cdc/usbd_cdc_core.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/otg/usb_dcd_int.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/otg/usb_core.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_conf/usb_bsp.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/otg/usb_dcd.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/core/usbd_req.c
+SRCS += $(STM_COMMON)/../SmartVision/usb_lib/core/usbd_ioreq.c
+
+
 
 
 # SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c
@@ -28,8 +48,7 @@ SRCS += $(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=SmartVision
 
-# Put your STM32F4 library code directory here
-STM_COMMON=../STM32F4-Discovery_FW_V1.1.0
+
 
 # Normally you shouldn't need to change anything below this line!
 #######################################################################################
@@ -51,6 +70,12 @@ CFLAGS += -I$(STM_COMMON)/Utilities/STM32F4-Discovery
 CFLAGS += -I$(STM_COMMON)/Libraries/CMSIS/Include 
 CFLAGS += -I$(STM_COMMON)/Libraries/CMSIS/ST/STM32F4xx/Include
 CFLAGS += -I$(STM_COMMON)/Libraries/STM32F4xx_StdPeriph_Driver/inc/
+		# USB library 
+CFLAGS += -I$(STM_COMMON)/../SmartVision/usb_lib/cdc
+CFLAGS += -I$(STM_COMMON)/../SmartVision/usb_lib/core
+CFLAGS += -I$(STM_COMMON)/../SmartVision/usb_lib/otg
+CFLAGS += -I$(STM_COMMON)/../SmartVision/usb_conf
+
 
 # add startup file to build
 SRCS += $(STM_COMMON)/Libraries/CMSIS/ST/STM32F4xx/Source/Templates/TrueSTUDIO/startup_stm32f4xx.s 

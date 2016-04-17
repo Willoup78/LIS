@@ -24,7 +24,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
 #include "camera_api.h"
-// #include "main.h" // Don't have main.h for now
+// USB library
+#include "main.h" 
+#include "usb_dcd_int.h"
 
 /** @addtogroup STM32F4_Discovery_Peripheral_Examples
   * @{
@@ -38,6 +40,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+// extern volatile uint32_t ticker, downTicker;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -45,103 +48,100 @@
 /*            Cortex-M3 Processor Exceptions Handlers                         */
 /******************************************************************************/
 
-/**
-  * @brief   This function handles NMI exception.
-  * @param  None
-  * @retval None
-  */
-void NMI_Handler(void)
-{
-}
+// /**
+//   * @brief   This function handles NMI exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void NMI_Handler(void)
+// {
+// }
 
-/**
-  * @brief  This function handles Hard Fault exception.
-  * @param  None
-  * @retval None
-  */
-void HardFault_Handler(void)
-{
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
-}
+// /**
+//   * @brief  This function handles Hard Fault exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void HardFault_Handler(void)
+// {
+//  // ColorfulRingOfDeath(); //LED blinking in case of failure
+// }
 
-/**
-  * @brief  This function handles Memory Manage exception.
-  * @param  None
-  * @retval None
-  */
-void MemManage_Handler(void)
-{
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
-}
+// /**
+//   * @brief  This function handles Memory Manage exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void MemManage_Handler(void)
+// {
+//   // ColorfulRingOfDeath(); //LED blinking in case of failure
+// }
 
-/**
-  * @brief  This function handles Bus Fault exception.
-  * @param  None
-  * @retval None
-  */
-void BusFault_Handler(void)
-{
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
-}
+// /**
+//   * @brief  This function handles Bus Fault exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void BusFault_Handler(void)
+// {
+//   // ColorfulRingOfDeath(); //LED blinking in case of failure
+// }
 
-/**
-  * @brief  This function handles Usage Fault exception.
-  * @param  None
-  * @retval None
-  */
-void UsageFault_Handler(void)
-{
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
-}
+// *
+//   * @brief  This function handles Usage Fault exception.
+//   * @param  None
+//   * @retval None
+  
+// void UsageFault_Handler(void)
+// {
+//   // ColorfulRingOfDeath(); //LED blinking in case of failure
+// }
 
-/**
-  * @brief  This function handles SVCall exception.
-  * @param  None
-  * @retval None
-  */
-void SVC_Handler(void)
-{
-}
+// /**
+//   * @brief  This function handles SVCall exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void SVC_Handler(void)
+// {
+// }
 
-/**
-  * @brief  This function handles Debug Monitor exception.
-  * @param  None
-  * @retval None
-  */
-void DebugMon_Handler(void)
-{
-}
+// /**
+//   * @brief  This function handles Debug Monitor exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void DebugMon_Handler(void)
+// {
+// }
 
-/**
-  * @brief  This function handles PendSVC exception.
-  * @param  None
-  * @retval None
-  */
-void PendSV_Handler(void)
-{
-}
+// /**
+//   * @brief  This function handles PendSVC exception.
+//   * @param  None
+//   * @retval None
+//   */
+// void PendSV_Handler(void)
+// {
+// }
 
-/**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
-void SysTick_Handler(void)
-{
-  TimingDelay_Decrement();
-}
+// /**
+//   * @brief  This function handles SysTick Handler.
+//   * @param  None
+//   * @retval None
+//   */
+// void SysTick_Handler(void)
+// {
+//   TimingDelay_Decrement();
+
+//   // ticker++;
+//   // if (downTicker > 0)
+//   // {
+//   //   downTicker--;
+//   // }
+
+// }
+
+
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
